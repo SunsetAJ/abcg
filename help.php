@@ -92,8 +92,13 @@ function dwwp_meta_callback( $post ) {
 		          <option value="Yes" <?php if ( ! empty ( $dwwp_stored_meta['relocation_assistance'] ) ) selected( $dwwp_stored_meta['relocation_assistance'][0], 'Yes' ); ?>><?php _e( 'Yes', 'wp-job-listing' )?></option>';
 		          <option value="No" <?php if ( ! empty ( $dwwp_stored_meta['relocation_assistance'] ) ) selected( $dwwp_stored_meta['relocation_assistance'][0], 'No' ); ?>><?php _e( 'No', 'wp-job-listing' )?></option>';
 	          </select>
+<<<<<<< HEAD
 	    </div>
 	</div>
+=======
+	    </div> 
+	</div>	
+>>>>>>> origin/master
 	<?php
 }
 function dwwp_meta_save( $post_id ) {
@@ -128,5 +133,8 @@ function dwwp_meta_save( $post_id ) {
 	}
 }
 add_action( 'save_post', 'dwwp_meta_save' );
+<<<<<<< HEAD
 
 //<small style="margin-bottom: 15px; display: block;">* You can enter multiple class, <i>seperate classes with commas</i> *</small>
+=======
+>>>>>>> origin/master
