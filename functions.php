@@ -29,7 +29,7 @@
       <div class="form-elements">
 
         <div style="margin-bottom: 20px;" class="test-field">
-          <label for="test_id">Test Field ID</label>
+          <label for="test_id"><?php _e('Test ID', 'treehouse_wp') ?></label>
           <input type="text" name="test_id" id="test_id"
   				value="<?php if ( ! empty ( $acbg_stored_meta['test_id'] ) ) {
   					echo esc_attr( $acbg_stored_meta['test_id'][0] );
@@ -37,23 +37,36 @@
         </div>
 
         <div style="margin-bottom: 20px;" class="container-type">
-          <h4>Select Container Type</h4>
-          <input type="radio" name="container-type" value="container" checked>Normal Container</br>
-          <input type="radio" name="container-type" value="fluid-container">Fluid Container</br>
+          <label for="containerType"><?php _e('Container Type *Default is normal*', 'treehouse_wp') ?></label>
+          <select name="containerType" id="containerType">
+            <option value="Normal" <?php if (! empty($acbg_stored_meta['containerType'])) selected($acbg_stored_meta['containerType'][0], 'Normal'); ?>><?php _e('Normal', 'treehouse_wp') ?></option>';
+            <option value="Fluid" <?php if (! empty($acbg_stored_meta['containerType'])) selected($acbg_stored_meta['containerType'][0], 'Fluid'); ?>><?php _e('Fluid', 'treehouse_wp') ?></option>';
+          </select>
         </div>
 
         <div style="margin-bottom: 20px;" class="num-of-rows">
-          <h4>Select Number of Rows:</h4>
-          <select name="numOfRows">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+          <label for="numOfRows"><?php _e('Number of Rows', 'treehouse_wp') ?></label>
+          <select name="numOfRows" id="numOfRows">
+            <option value="0" <?php if ( ! empty ( $acbg_stored_meta['numOfRows'] ) ) selected( $acbg_stored_meta['numOfRows'][0], '0' ); ?>><?php _e( '0', 'treehouse_wp' )?></option>';
+            <option value="1" <?php if ( ! empty ( $acbg_stored_meta['numOfRows'] ) ) selected( $acbg_stored_meta['numOfRows'][0], '1' ); ?>><?php _e( '1', 'treehouse_wp' )?></option>';
+            <option value="2" <?php if ( ! empty ( $acbg_stored_meta['numOfRows'] ) ) selected( $acbg_stored_meta['numOfRows'][0], '2' ); ?>><?php _e( '2', 'treehouse_wp' )?></option>';
+            <option value="3" <?php if ( ! empty ( $acbg_stored_meta['numOfRows'] ) ) selected( $acbg_stored_meta['numOfRows'][0], '3' ); ?>><?php _e( '3', 'treehouse_wp' )?></option>';
+            <option value="4" <?php if ( ! empty ( $acbg_stored_meta['numOfRows'] ) ) selected( $acbg_stored_meta['numOfRows'][0], '4' ); ?>><?php _e( '4', 'treehouse_wp' )?></option>';
           </select>
-          <small>* Once you have selected a NEW number press the update button *</small>
+          <small><br>* Once you have selected a NEW number press the update button *</small>
         </div>
+
+        <?php
+          $cont = get_post_meta($post->ID, 'containerType', true);
+          $num = get_post_meta($post->ID, 'numOfRows', true);
+        ?>
+
+        <?php
+          if ($num >= 1){
+            
+          }
+        ?>
+
       </div>
     <?php
   }
@@ -72,6 +85,12 @@
       }
       if ( isset( $_POST[ 'test_id' ] ) ) {
       	update_post_meta( $post_id, 'test_id', sanitize_text_field( $_POST[ 'test_id' ] ) );
+      }
+      if (isset($_POST['containerType'])){
+          update_post_meta($post_id, 'containerType', sanitize_text_field($_POST['containerType']));
+      }
+      if ( isset( $_POST['numOfRows'])){
+        update_post_meta($post_id, 'numOfRows', sanitize_text_field($_POST['numOfRows']));
       }
   }
   add_action( 'save_post', 'dwwp_meta_save' );
